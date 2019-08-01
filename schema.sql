@@ -1,0 +1,13 @@
+DROP DATABASE IF EXISTS bamazon_DB;
+CREATE DATABASE bamazon_DB;
+
+USE bamazon_DB;
+
+CREATE TABLE items (
+  item_id INT NOT NULL AUTO_INCREMENT,
+  item_name VARCHAR(100) NOT NULL,
+  category VARCHAR(100) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  stock INTEGER(10),
+  PRIMARY KEY (item_id)
+);
