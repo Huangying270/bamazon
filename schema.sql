@@ -11,3 +11,13 @@ CREATE TABLE items (
   stock INTEGER(10),
   PRIMARY KEY (item_id)
 );
+
+INSERT INTO items (item_name, category, price, stock)
+VALUES  ("Nintendo Switch", "Electronics", 299.99, 99),
+        ("Super Mario Party", "Games", 39.99, 99),
+        ("Samsung Refrigerator", "Appliances", 799.99, 99),
+        ("Babalot Tennis Racquet", "Sports", 149.99, 49),
+        ("Wilson Tennis Bag", "Sports", 49.99, 60),
+        ("Marshmallow Bag", "Food", 6.99, 199),
+        ("Oreos", "Food", 8.99, 399),
+        ("Settlers of Catan", "Games", 49.99, 50);
