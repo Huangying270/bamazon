@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
 
     user: "root",
 
-    password: "",
+    password: "password",
     database: "bamazon_DB"
 });
 
@@ -50,9 +50,22 @@ function makePurchase() {
         ]).then(function(answer){
             var itemID = answer.id;
             var quantityWanted = answer.quantity;
-            console.log(itemID);
-            console.log(quantityWanted);
+            confirmOrder(itemID, quantityWanted);
         });
+}
+
+function confirmOrder(id, amountWanted){
+    connection.query("SELECT * FROM items WHERE item_id = " + id, function(err,res){
+        if(err) throw err;
+        if(amountWanted <= res[0].stock){
+            var totalCost = res[0].price * amountWanted;
+            console.log("Your total for " + amountWanted + " " + res[0].item_name + " is " + totalCost + " Thank you!");
+            connection.query("UPDATE items SET stock = stock - " + amountWanted + " WHERE item_id = " + id);
+        } else {
+            console.log("Insufficient stock");
+        };
+        displayInventory();
+    });
 }
 
 /* CREATE TABLE items (
