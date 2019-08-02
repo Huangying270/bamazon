@@ -21,17 +21,38 @@ connection.connect(function (err) {
 function displayInventory() {
     var query = "SELECT * FROM items";
     connection.query(query, function (err, res) {
-        if(err) throw err;
-        var displayTable = new Table ({
+        if (err) throw err;
+        var displayTable = new Table({
             head: ["Item ID", "Item Name", "Category", "Price", "Stock Quantity"],
-            colWidth: [10,20,20,10,10]
+            colWidth: [10, 20, 20, 10, 10]
         });
-        for(var i = 0; i < res.length; i++) {
+        for (var i = 0; i < res.length; i++) {
             displayTable.push([res[i].item_id, res[i].item_name, res[i].category, res[i].price, res[i].stock]);
         }
         console.log(displayTable.toString());
+        makePurchase();
     });
-    
+}
+
+function makePurchase() {
+    inquirer
+        .prompt([
+            {
+                name: "id",
+                type: "input",
+                message: "Please enter item ID you would like to purchase"
+            },
+            {
+                name: "quantity",
+                type: "input",
+                message: "How many would you like to purchase?"
+            }
+        ]).then(function(answer){
+            var itemID = answer.id;
+            var quantityWanted = answer.quantity;
+            console.log(itemID);
+            console.log(quantityWanted);
+        });
 }
 
 /* CREATE TABLE items (
